@@ -86,25 +86,35 @@ export default {
 
 		if (pathname === '/api/levels' && req.method === 'PUT') {
 			if (!await authed(req, env.DB)) return err('Unauthorized', 401);
-			const body = await req.json() as Record<string, unknown>;
-			const path = body.path as string;
+			const body = await req.json();
+			let sortOrder;
+			if (body.insertAt != null) {
+				sortOrder = body.insertAt - 1;
+				await env.DB.prepare('UPDATE levels SET sort_order = sort_order + 1 WHERE sort_order >= ?').bind(sortOrder).run();
+			} else {
+				const maxRow = await env.DB.prepare('SELECT MAX(sort_order) as m FROM levels').first();
+				sortOrder = (maxRow?.m ?? -1) + 1;
+			}
 			await env.DB.prepare(`
-                INSERT INTO levels (path,name,author,verifier,verification,showcase,thumbnail,id,
-                    percentToQualify,percentFinished,length,rating,lastUpd,isVerified,tags,records,run,sort_order)
-                VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
-                ON CONFLICT(path) DO UPDATE SET
-                    name=excluded.name,author=excluded.author,verifier=excluded.verifier,
-                    verification=excluded.verification,showcase=excluded.showcase,thumbnail=excluded.thumbnail,
-                    id=excluded.id,percentToQualify=excluded.percentToQualify,
-                    percentFinished=excluded.percentFinished,length=excluded.length,rating=excluded.rating,
-                    lastUpd=excluded.lastUpd,isVerified=excluded.isVerified,tags=excluded.tags,
-                    records=excluded.records,run=excluded.run,sort_order=excluded.sort_order
-            `).bind(
-				path, body.name, body.author, body.verifier, body.verification, body.showcase,
-				body.thumbnail, body.id, body.percentToQualify, body.percentFinished,
-				body.length, body.rating, body.lastUpd, body.isVerified ? 1 : 0,
-				JSON.stringify(body.tags ?? []), JSON.stringify(body.records ?? []),
-				body.run != null ? JSON.stringify(body.run) : null, body.sort_order ?? 0
+				INSERT INTO levels (path,name,author,creators,verifier,verification,showcase,thumbnail,id,
+									percentToQualify,percentFinished,length,rating,lastUpd,isVerified,isMain,isFuture,tags,records,run,sort_order)
+				VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+					ON CONFLICT(path) DO UPDATE SET
+					name=excluded.name,author=excluded.author,creators=excluded.creators,
+					verifier=excluded.verifier,verification=excluded.verification,
+					showcase=excluded.showcase,thumbnail=excluded.thumbnail,id=excluded.id,
+					percentToQualify=excluded.percentToQualify,percentFinished=excluded.percentFinished,
+					length=excluded.length,rating=excluded.rating,lastUpd=excluded.lastUpd,
+					isVerified=excluded.isVerified,isMain=excluded.isMain,isFuture=excluded.isFuture,
+					tags=excluded.tags,records=excluded.records,run=excluded.run,sort_order=excluded.sort_order
+			`).bind(
+				body.path,body.name,body.author,
+				body.creators?JSON.stringify(body.creators):null,
+				body.verifier,body.verification,body.showcase,body.thumbnail,body.id,
+				body.percentToQualify,body.percentFinished,body.length,body.rating,body.lastUpd,
+				body.isVerified?1:0,body.isMain?1:0,body.isFuture?1:0,
+				JSON.stringify(body.tags??[]),JSON.stringify(body.records??[]),
+				body.run!=null?JSON.stringify(body.run):null,sortOrder
 			).run();
 			return json({ ok: true });
 		}
@@ -112,7 +122,12 @@ export default {
 		if (pathname.startsWith('/api/levels/') && req.method === 'DELETE') {
 			if (!await authed(req, env.DB)) return err('Unauthorized', 401);
 			const path = decodeURIComponent(pathname.slice('/api/levels/'.length));
-			await env.DB.prepare('DELETE FROM levels WHERE path = ?').bind(path).run();
+			const level = await env.DB.prepare('SELECT sort_order FROM levels WHERE path = ?').bind(path).first();
+			if (!level) return err('Level not found', 404);
+			await env.DB.batch([
+				env.DB.prepare('DELETE FROM levels WHERE path = ?').bind(path),
+				env.DB.prepare('UPDATE levels SET sort_order = sort_order - 1 WHERE sort_order > ?').bind(level.sort_order),
+			]);
 			return json({ ok: true });
 		}
 
@@ -160,5 +175,32 @@ export default {
 		}
 
 		return err('Not found', 404);
+
+		if (pathname === '/api/auth/validate' && req.method === 'GET') {
+			if (!await authed(req, env.DB)) return err('Unauthorized', 401);
+			return json({ ok: true });
+		}
+
+		if (pathname === '/api/levels/move' && req.method === 'POST') {
+			if (!await authed(req, env.DB)) return err('Unauthorized', 401);
+			const { path, newPosition } = await req.json();
+			const target = newPosition - 1;
+			const level = await env.DB.prepare('SELECT sort_order FROM levels WHERE path = ?').bind(path).first();
+			if (!level) return err('Level not found', 404);
+			const current = level.sort_order;
+			if (current === target) return json({ ok: true });
+			if (current < target) {
+				await env.DB.batch([
+					env.DB.prepare('UPDATE levels SET sort_order = sort_order - 1 WHERE sort_order > ? AND sort_order <= ?').bind(current, target),
+					env.DB.prepare('UPDATE levels SET sort_order = ? WHERE path = ?').bind(target, path),
+				]);
+			} else {
+				await env.DB.batch([
+					env.DB.prepare('UPDATE levels SET sort_order = sort_order + 1 WHERE sort_order >= ? AND sort_order < ?').bind(target, current),
+					env.DB.prepare('UPDATE levels SET sort_order = ? WHERE path = ?').bind(target, path),
+				]);
+			}
+			return json({ ok: true });
+		}
 	},
 };
