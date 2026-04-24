@@ -110,7 +110,7 @@ export default {
 					length=excluded.length,rating=excluded.rating,lastUpd=excluded.lastUpd,
 					isVerified=excluded.isVerified,isMain=excluded.isMain,isFuture=excluded.isFuture,
 					tags=excluded.tags,records=excluded.records,run=excluded.run,sort_order=excluded.sort_order
-			).bind(
+			`).bind(
 				body.path, body.name, body.author ?? null,
 				body.creators ? JSON.stringify(body.creators) : null,
 				body.verifier ?? null, body.verification ?? null, body.showcase ?? null,
@@ -209,3 +209,4 @@ export default {
 		}
 	},
 };
+				
