@@ -107,14 +107,16 @@ export default {
 					length=excluded.length,rating=excluded.rating,lastUpd=excluded.lastUpd,
 					isVerified=excluded.isVerified,isMain=excluded.isMain,isFuture=excluded.isFuture,
 					tags=excluded.tags,records=excluded.records,run=excluded.run,sort_order=excluded.sort_order
-			`).bind(
-				body.path,body.name,body.author,
-				body.creators?JSON.stringify(body.creators):null,
-				body.verifier,body.verification,body.showcase,body.thumbnail,body.id,
-				body.percentToQualify,body.percentFinished,body.length,body.rating,body.lastUpd,
-				body.isVerified?1:0,body.isMain?1:0,body.isFuture?1:0,
-				JSON.stringify(body.tags??[]),JSON.stringify(body.records??[]),
-				body.run!=null?JSON.stringify(body.run):null,sortOrder
+			).bind(
+				body.path, body.name, body.author ?? null,
+				body.creators ? JSON.stringify(body.creators) : null,
+				body.verifier ?? null, body.verification ?? null, body.showcase ?? null,
+				body.thumbnail ?? null, body.id ?? null,
+				body.percentToQualify ?? null, body.percentFinished ?? null,
+				body.length ?? null, body.rating ?? null, body.lastUpd ?? null,
+				body.isVerified ? 1 : 0, body.isMain ? 1 : 0, body.isFuture ? 1 : 0,
+				JSON.stringify(body.tags ?? []), JSON.stringify(body.records ?? []),
+				body.run != null ? JSON.stringify(body.run) : null, sortOrder
 			).run();
 			return json({ ok: true });
 		}
