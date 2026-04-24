@@ -32,13 +32,16 @@ async function authed(req: Request, db: D1Database): Promise<boolean> {
 	return row !== null;
 }
 
-function parseLevel(row: Record<string, unknown>) {
+function parseLevel(row) {
 	return {
 		...row,
 		isVerified: row.isVerified === 1,
-		tags: row.tags ? JSON.parse(row.tags as string) : [],
-		records: row.records ? JSON.parse(row.records as string) : [],
-		run: row.run ? JSON.parse(row.run as string) : null,
+		isMain: row.isMain === 1,
+		isFuture: row.isFuture === 1,
+		creators: row.creators ? JSON.parse(row.creators) : null,
+		tags: row.tags ? JSON.parse(row.tags) : [],
+		records: row.records ? JSON.parse(row.records) : [],
+		run: row.run ? JSON.parse(row.run) : null,
 	};
 }
 
