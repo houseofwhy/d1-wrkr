@@ -461,42 +461,42 @@ INSERT OR REPLACE INTO levels (path,name,author,verifier,verification,showcase,t
 INSERT OR REPLACE INTO levels (path,name,author,verifier,verification,showcase,thumbnail,id,percentToQualify,percentFinished,length,rating,lastUpd,isVerified,tags,records,run,sort_order) VALUES ('checked_steam','Checked Steam','gruzy',' Whizkid05','https://www.youtube.com/watch?v=cq6047eYGXs','https://www.youtube.com/watch?v=QmGYA-eLHtc',NULL,'105748155',1,100,65,1,'25.08.2024',1,'["Public","Finished","Rated","Long","Verified"]','[{"user":"none","link":"","percent":0,"hz":0}]','[{"user":"none","link":"","percent":"0","hz":0}]',460);
 INSERT OR REPLACE INTO levels (path,name,author,verifier,verification,showcase,thumbnail,id,percentToQualify,percentFinished,length,rating,lastUpd,isVerified,tags,records,run,sort_order) VALUES ('paranoia','Paranoia','Amplitron','Amplitron','https://www.youtube.com/watch?v=Aw83i8Zmh_0','https://www.youtube.com/watch?v=rg06lq4HL2c',NULL,'113364415',1,100,74,1,'24.01.2026',1,'["Public","Finished","Rated","Long","NONG","Verified"]','[{"user":"none","link":"","percent":0,"hz":0}]','[{"user":"none","link":"","percent":"0","hz":0}]',461);
 INSERT OR REPLACE INTO levels (path,name,author,verifier,verification,showcase,thumbnail,id,percentToQualify,percentFinished,length,rating,lastUpd,isVerified,tags,records,run,sort_order) VALUES ('critical_heat_zeniux','Critical Heat (Zeniux)','Zeniux',' hstorm','https://youtu.be/UjYIt2jy_BY?si=BLcuDJZ2mslHQM04','https://youtu.be/-Fhz3qZVb9c?si=fl3NRaazL6J6AQkv',NULL,'88442157',1,100,62,1,'18.03.2023',1,'["Public","Finished","Rated","Long","Verified"]','[{"user":"none","link":"","percent":0,"hz":0}]','[{"user":"none","link":"","percent":"0","hz":0}]',462);
-INSERT OR REPLACE INTO pending (path,name,author,verifier,verification,showcase,thumbnail,id,percentToQualify,percentFinished,length,rating,lastUpd,tags,records,run,sort_order) VALUES ('0','ZOINK NEVER CLEAR',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'[]','[]',NULL,0);
-INSERT OR REPLACE INTO pending (path,name,author,verifier,verification,showcase,thumbnail,id,percentToQualify,percentFinished,length,rating,lastUpd,tags,records,run,sort_order) VALUES ('1','WONDERLAND',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'[]','[]',NULL,1);
-INSERT OR REPLACE INTO pending (path,name,author,verifier,verification,showcase,thumbnail,id,percentToQualify,percentFinished,length,rating,lastUpd,tags,records,run,sort_order) VALUES ('2','ByteShift',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'[]','[]',NULL,2);
-INSERT OR REPLACE INTO pending (path,name,author,verifier,verification,showcase,thumbnail,id,percentToQualify,percentFinished,length,rating,lastUpd,tags,records,run,sort_order) VALUES ('3','Carcion',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'[]','[]',NULL,3);
-INSERT OR REPLACE INTO pending (path,name,author,verifier,verification,showcase,thumbnail,id,percentToQualify,percentFinished,length,rating,lastUpd,tags,records,run,sort_order) VALUES ('4','Nihilum',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'[]','[]',NULL,4);
-INSERT OR REPLACE INTO pending (path,name,author,verifier,verification,showcase,thumbnail,id,percentToQualify,percentFinished,length,rating,lastUpd,tags,records,run,sort_order) VALUES ('5','00 Genesis',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'[]','[]',NULL,5);
-INSERT OR REPLACE INTO pending (path,name,author,verifier,verification,showcase,thumbnail,id,percentToQualify,percentFinished,length,rating,lastUpd,tags,records,run,sort_order) VALUES ('6','Constellations Song',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'[]','[]',NULL,6);
-INSERT OR REPLACE INTO pending (path,name,author,verifier,verification,showcase,thumbnail,id,percentToQualify,percentFinished,length,rating,lastUpd,tags,records,run,sort_order) VALUES ('7','belowZERO',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'[]','[]',NULL,7);
-INSERT OR REPLACE INTO pending (path,name,author,verifier,verification,showcase,thumbnail,id,percentToQualify,percentFinished,length,rating,lastUpd,tags,records,run,sort_order) VALUES ('8','Subconscious',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'[]','[]',NULL,8);
-INSERT OR REPLACE INTO pending (path,name,author,verifier,verification,showcase,thumbnail,id,percentToQualify,percentFinished,length,rating,lastUpd,tags,records,run,sort_order) VALUES ('9','Outcast',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'[]','[]',NULL,9);
-INSERT OR REPLACE INTO pending (path,name,author,verifier,verification,showcase,thumbnail,id,percentToQualify,percentFinished,length,rating,lastUpd,tags,records,run,sort_order) VALUES ('10','Sky Linuddier',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'[]','[]',NULL,10);
-INSERT OR REPLACE INTO pending (path,name,author,verifier,verification,showcase,thumbnail,id,percentToQualify,percentFinished,length,rating,lastUpd,tags,records,run,sort_order) VALUES ('11','Losing Your Mind',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'[]','[]',NULL,11);
-INSERT OR REPLACE INTO pending (path,name,author,verifier,verification,showcase,thumbnail,id,percentToQualify,percentFinished,length,rating,lastUpd,tags,records,run,sort_order) VALUES ('12','SwiftVortex',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'[]','[]',NULL,12);
-INSERT OR REPLACE INTO pending (path,name,author,verifier,verification,showcase,thumbnail,id,percentToQualify,percentFinished,length,rating,lastUpd,tags,records,run,sort_order) VALUES ('13','The Fire and Flames',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'[]','[]',NULL,13);
-INSERT OR REPLACE INTO pending (path,name,author,verifier,verification,showcase,thumbnail,id,percentToQualify,percentFinished,length,rating,lastUpd,tags,records,run,sort_order) VALUES ('14','Narine',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'[]','[]',NULL,14);
-INSERT OR REPLACE INTO pending (path,name,author,verifier,verification,showcase,thumbnail,id,percentToQualify,percentFinished,length,rating,lastUpd,tags,records,run,sort_order) VALUES ('15','Shattered Kingdom',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'[]','[]',NULL,15);
-INSERT OR REPLACE INTO pending (path,name,author,verifier,verification,showcase,thumbnail,id,percentToQualify,percentFinished,length,rating,lastUpd,tags,records,run,sort_order) VALUES ('16','WAVING',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'[]','[]',NULL,16);
-INSERT OR REPLACE INTO pending (path,name,author,verifier,verification,showcase,thumbnail,id,percentToQualify,percentFinished,length,rating,lastUpd,tags,records,run,sort_order) VALUES ('17','Icarus',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'[]','[]',NULL,17);
-INSERT OR REPLACE INTO pending (path,name,author,verifier,verification,showcase,thumbnail,id,percentToQualify,percentFinished,length,rating,lastUpd,tags,records,run,sort_order) VALUES ('18','Meshwork',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'[]','[]',NULL,18);
-INSERT OR REPLACE INTO pending (path,name,author,verifier,verification,showcase,thumbnail,id,percentToQualify,percentFinished,length,rating,lastUpd,tags,records,run,sort_order) VALUES ('19','Session 1',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'[]','[]',NULL,19);
-INSERT OR REPLACE INTO pending (path,name,author,verifier,verification,showcase,thumbnail,id,percentToQualify,percentFinished,length,rating,lastUpd,tags,records,run,sort_order) VALUES ('20','Final Level',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'[]','[]',NULL,20);
-INSERT OR REPLACE INTO pending (path,name,author,verifier,verification,showcase,thumbnail,id,percentToQualify,percentFinished,length,rating,lastUpd,tags,records,run,sort_order) VALUES ('21','Vindication',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'[]','[]',NULL,21);
-INSERT OR REPLACE INTO pending (path,name,author,verifier,verification,showcase,thumbnail,id,percentToQualify,percentFinished,length,rating,lastUpd,tags,records,run,sort_order) VALUES ('22','The French',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'[]','[]',NULL,22);
-INSERT OR REPLACE INTO pending (path,name,author,verifier,verification,showcase,thumbnail,id,percentToQualify,percentFinished,length,rating,lastUpd,tags,records,run,sort_order) VALUES ('23','Fall In Line',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'[]','[]',NULL,23);
-INSERT OR REPLACE INTO pending (path,name,author,verifier,verification,showcase,thumbnail,id,percentToQualify,percentFinished,length,rating,lastUpd,tags,records,run,sort_order) VALUES ('24','Canyon',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'[]','[]',NULL,24);
-INSERT OR REPLACE INTO pending (path,name,author,verifier,verification,showcase,thumbnail,id,percentToQualify,percentFinished,length,rating,lastUpd,tags,records,run,sort_order) VALUES ('25','BALLISTIC BALLPIT',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'[]','[]',NULL,25);
-INSERT OR REPLACE INTO pending (path,name,author,verifier,verification,showcase,thumbnail,id,percentToQualify,percentFinished,length,rating,lastUpd,tags,records,run,sort_order) VALUES ('26','the last dream',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'[]','[]',NULL,26);
-INSERT OR REPLACE INTO pending (path,name,author,verifier,verification,showcase,thumbnail,id,percentToQualify,percentFinished,length,rating,lastUpd,tags,records,run,sort_order) VALUES ('27','Operation Zoink',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'[]','[]',NULL,27);
-INSERT OR REPLACE INTO pending (path,name,author,verifier,verification,showcase,thumbnail,id,percentToQualify,percentFinished,length,rating,lastUpd,tags,records,run,sort_order) VALUES ('28','EVERBLOOM',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'[]','[]',NULL,28);
-INSERT OR REPLACE INTO pending (path,name,author,verifier,verification,showcase,thumbnail,id,percentToQualify,percentFinished,length,rating,lastUpd,tags,records,run,sort_order) VALUES ('29','Quantong Processing',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'[]','[]',NULL,29);
-INSERT OR REPLACE INTO pending (path,name,author,verifier,verification,showcase,thumbnail,id,percentToQualify,percentFinished,length,rating,lastUpd,tags,records,run,sort_order) VALUES ('30','Vaporeta',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'[]','[]',NULL,30);
-INSERT OR REPLACE INTO pending (path,name,author,verifier,verification,showcase,thumbnail,id,percentToQualify,percentFinished,length,rating,lastUpd,tags,records,run,sort_order) VALUES ('31','Hyoko',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'[]','[]',NULL,31);
-INSERT OR REPLACE INTO pending (path,name,author,verifier,verification,showcase,thumbnail,id,percentToQualify,percentFinished,length,rating,lastUpd,tags,records,run,sort_order) VALUES ('32','The Final Phase',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'[]','[]',NULL,32);
-INSERT OR REPLACE INTO pending (path,name,author,verifier,verification,showcase,thumbnail,id,percentToQualify,percentFinished,length,rating,lastUpd,tags,records,run,sort_order) VALUES ('33','Korobeiniki',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'[]','[]',NULL,33);
-INSERT OR REPLACE INTO pending (path,name,author,verifier,verification,showcase,thumbnail,id,percentToQualify,percentFinished,length,rating,lastUpd,tags,records,run,sort_order) VALUES ('34','SUPERFEARMEWORLD',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'[]','[]',NULL,34);
-INSERT OR REPLACE INTO pending (path,name,author,verifier,verification,showcase,thumbnail,id,percentToQualify,percentFinished,length,rating,lastUpd,tags,records,run,sort_order) VALUES ('35','Soul Restoration',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'[]','[]',NULL,35);
+INSERT INTO pending (name,placement,link,sort_order) VALUES ('ZOINK NEVER CLEAR','1','https://youtu.be/sdwrOXNV6ws?si=J7fZz9axNTpopYzv',0);
+INSERT INTO pending (name,placement,link,sort_order) VALUES ('WONDERLAND','1','https://youtu.be/wyDGBiYtjOQ?si=qGWuFq65DwyDztG',1);
+INSERT INTO pending (name,placement,link,sort_order) VALUES ('ByteShift','10','https://youtu.be/HlLi-WAVeRk?si=gaxEPnZZ3DxorCfh',2);
+INSERT INTO pending (name,placement,link,sort_order) VALUES ('Carcion','10','https://youtu.be/hsBltB_8l0M?si=99rOJiaObd6nqITw',3);
+INSERT INTO pending (name,placement,link,sort_order) VALUES ('Nihilum','10','https://www.youtube.com/watch?v=I31pahrX6Ic',4);
+INSERT INTO pending (name,placement,link,sort_order) VALUES ('00 Genesis','10','https://youtu.be/PAvL7kAupDY?si=ezDR9XLfcNw9k-zo',5);
+INSERT INTO pending (name,placement,link,sort_order) VALUES ('Constellations Song','10','https://youtu.be/wKB7HG3xdGc?si=Mnz8AyJw371Drt6Z',6);
+INSERT INTO pending (name,placement,link,sort_order) VALUES ('belowZERO','10','https://youtu.be/8IJxmfvoXOE?si=7m8EWyBdbriRgJaO',7);
+INSERT INTO pending (name,placement,link,sort_order) VALUES ('Subconscious','20','https://youtu.be/J7_rzTkAD8M?si=FxKmCTEcqB7nxqq9',8);
+INSERT INTO pending (name,placement,link,sort_order) VALUES ('Outcast','20','https://youtu.be/YLBSCpQuxLo?si=pg2d-MtT_zSCF0Eh',9);
+INSERT INTO pending (name,placement,link,sort_order) VALUES ('Sky Linuddier','20','https://youtu.be/jIot3KCggmk?si=iAziMKh3p5Z4pvxD',10);
+INSERT INTO pending (name,placement,link,sort_order) VALUES ('Losing Your Mind','20','https://m.youtube.com/watch?v=OdNqIMzLRzE',11);
+INSERT INTO pending (name,placement,link,sort_order) VALUES ('SwiftVortex','20','https://www.youtube.com/watch?v=xYEzpHQ3b98',12);
+INSERT INTO pending (name,placement,link,sort_order) VALUES ('The Fire and Flames','20','https://youtu.be/nZsVj499xeU?si=5Xbdde12FWxZzHeQ',13);
+INSERT INTO pending (name,placement,link,sort_order) VALUES ('Narine','20','https://youtu.be/9WGGm4_FKt0',14);
+INSERT INTO pending (name,placement,link,sort_order) VALUES ('Shattered Kingdom','50','https://youtu.be/0S5XYgn4K_0?si=gPvDonBoIeyE6Iu6',15);
+INSERT INTO pending (name,placement,link,sort_order) VALUES ('WAVING','50','https://youtu.be/F2cRzzgnWno?si=fPTket6DJKvTv7o-',16);
+INSERT INTO pending (name,placement,link,sort_order) VALUES ('Icarus','50','https://youtu.be/LNX8WFl71x0?si=CNtMq9nqDpewsJk7',17);
+INSERT INTO pending (name,placement,link,sort_order) VALUES ('Meshwork','50','https://youtu.be/j-hK6bl5pMY?si=r3ITqBl3Jv-WKSIW',18);
+INSERT INTO pending (name,placement,link,sort_order) VALUES ('Session 1','75','https://youtu.be/WOtisHee84k?si=n_Zr4w3QjdI8e22Z',19);
+INSERT INTO pending (name,placement,link,sort_order) VALUES ('Final Level','75','https://youtu.be/X2lFZ1xhqxU?si=5bJOLYSP4kG7XXkL',20);
+INSERT INTO pending (name,placement,link,sort_order) VALUES ('Vindication','75','https://www.youtube.com/watch?v=vq2oEIuyLTo',21);
+INSERT INTO pending (name,placement,link,sort_order) VALUES ('The French','75','https://youtu.be/910sbdTvqsg?si=krPhezFlAY-WjD6z',22);
+INSERT INTO pending (name,placement,link,sort_order) VALUES ('Fall In Line','75','https://youtu.be/ALqVF96ARBU?si=qjplhr7GHTfatLiB',23);
+INSERT INTO pending (name,placement,link,sort_order) VALUES ('Canyon','75','https://www.youtube.com/watch?v=IYM4Nh17_Ko',24);
+INSERT INTO pending (name,placement,link,sort_order) VALUES ('BALLISTIC BALLPIT','75','https://youtu.be/6Baug9fL9JA?si=WeZHdDERPU1rWBsv',25);
+INSERT INTO pending (name,placement,link,sort_order) VALUES ('the last dream','75','https://www.youtube.com/watch?v=8IH56Bog3xs',26);
+INSERT INTO pending (name,placement,link,sort_order) VALUES ('Operation Zoink','75','https://www.youtube.com/watch?v=NvsLfMfstsg',27);
+INSERT INTO pending (name,placement,link,sort_order) VALUES ('EVERBLOOM','75','https://youtu.be/P4jHbUwkUv8?si=ZEf0QTOBRe0QgdaB',28);
+INSERT INTO pending (name,placement,link,sort_order) VALUES ('Quantong Processing','?','https://www.youtube.com/watch?v=oubFsPJ9yYM&pp=ygULcXVhbnRvbmcgZ2TSBwkJxQoBhyohjO8%3D',29);
+INSERT INTO pending (name,placement,link,sort_order) VALUES ('Vaporeta','?','https://m.youtube.com/watch?v=pNdFGeeStjo',30);
+INSERT INTO pending (name,placement,link,sort_order) VALUES ('Hyoko','?','https://youtu.be/zTDVM56hr_I?si=fSOfbbK2VVWwtuT3',31);
+INSERT INTO pending (name,placement,link,sort_order) VALUES ('The Final Phase','?','https://www.youtube.com/watch?v=nBcJivS8X1A',32);
+INSERT INTO pending (name,placement,link,sort_order) VALUES ('Korobeiniki','?','https://www.youtube.com/watch?v=E5PURBZEKXM',33);
+INSERT INTO pending (name,placement,link,sort_order) VALUES ('SUPERFEARMEWORLD','?','https://youtu.be/xMXlbfKUKFY?si=yPerkxJo5cLB705l',34);
+INSERT INTO pending (name,placement,link,sort_order) VALUES ('Soul Restoration','?','https://youtu.be/ruioggDMcRQ?si=5JFm5vreG1LwAZ4Y',35);
 INSERT OR REPLACE INTO editors (name,role,sort_order) VALUES ('QwidziT','owner',0);
 INSERT OR REPLACE INTO editors (name,role,sort_order) VALUES ('Exiled_Shade','admin',1);
 INSERT OR REPLACE INTO editors (name,role,sort_order) VALUES ('VivisectionGD','seniormod',2);
@@ -513,3 +513,60 @@ INSERT OR REPLACE INTO editors (name,role,sort_order) VALUES ('Prometheus','dev'
 INSERT OR REPLACE INTO editors (name,role,sort_order) VALUES ('QwidziT','dev',13);
 INSERT OR REPLACE INTO editors (name,role,sort_order) VALUES ('NikoYakorem','dev',14);
 INSERT OR REPLACE INTO editors (name,role,sort_order) VALUES ('ausansdev','dev',15);
+INSERT OR REPLACE INTO config (key,value) VALUES ('recent_changes','[
+  {
+    "date": "April 18, 2026",
+    "entries": [
+        "**Glass Chapel** has been moved up from #129 to #78, below **Misanthrope** and above **Tight Clubstep**",
+        "**BALLISTIC BALLPIT** has been placed at #415, above **Erosion** and below **Between Duality**"
+    ]
+  },
+  {
+    "date": "April 16, 2026",
+    "entries": [
+        "**Angelicide** has been moved down from #9 to #17, above **TRUE METAL CRUSHER** and below **KOCMOC UNLEASHED**",
+        "**Heliopolis** has been moved down from #18 to #20, above **STEAM CRASHED UH OH** and below **Nebulabrasque**",
+        "**Vehemence** has been moved up from #23 to #16, above **KOCMOC UNLEASHED** and below **ReFRACTURED**"
+    ]
+  },
+  {
+    "date": "April 14, 2026",
+    "entries": [
+        "**Woofel** has been placed at #131, above **Every end** and below **Penumbral**",
+        "**Astaroth** has been placed at #207, above **Argentysm** and below **Kyouki**",
+        "**Phantasm IV** has been placed at #279, above **Firework** and below **Through The Gates**",
+        "**Fiberglass** has been placed at #359, above **The Only Wish** and below **The Yangire**"
+    ]
+  },
+  {
+    "date": "April 13, 2026",
+    "entries": [
+        "**Enchanting Skylight** has been placed at #387, above **Hitorigoto** and below **Sanguine**",
+        "**Africa Circles** has been placed at #89, above **Theory of Sevvend** and below **SILENT OPPENHEIMER**",
+        "**Theory of Sevvend** has been placed at #90, above **Tidal Wave** and below **Africa Circles**",
+        "**NOTARTARUS** has been placed at #396, above **Waterfall** and below **IKEA LEVEL**"
+    ]
+  }
+]
+');
+INSERT OR REPLACE INTO config (key,value) VALUES ('level_month','{
+  "name": "Aeternus",
+  "rank": 3,
+  "author": "Riot",
+  "id": 102647436,
+  "thumbnail": "https://www.youtube.com/watch?v=WIjuyPd3kck",
+  "periodStart": "2026-04-29",
+  "record": { "percent": "20%", "player": "dewbbs", "link": "" },
+  "run": { "percent": "72-100%", "player": "Chill Guy", "link": "" }
+}
+');
+INSERT OR REPLACE INTO config (key,value) VALUES ('level_verif','{
+  "name": "Antarctic Lights",
+  "rank": 124,
+  "author": "declan",
+  "thumbnail": "https://www.youtube.com/watch?v=oZfKkZ36L9Q",
+  "verifier": "Axinity",
+  "record": { "percent": "90%", "player": "Axinity", "link": "" },
+  "run": { "percent": "25-100", "player": "Axinity", "link": "" }
+}
+');

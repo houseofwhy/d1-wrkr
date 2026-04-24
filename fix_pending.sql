@@ -1,0 +1,8 @@
+﻿DROP TABLE IF EXISTS pending;
+CREATE TABLE IF NOT EXISTS pending (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    placement TEXT NOT NULL,
+    link TEXT,
+    sort_order INTEGER
+);

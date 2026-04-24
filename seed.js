@@ -21,11 +21,8 @@ listPaths.forEach((lp, i) => {
 // Pending
 try {
     const pending = JSON.parse(fs.readFileSync(path.join(dataDir, '_pending.json'), 'utf8'));
-    const items = typeof pending[0] === 'string'
-        ? pending.map((lp, i) => { try { return [lp, JSON.parse(fs.readFileSync(path.join(dataDir, `${lp}.json`), 'utf8'))]; } catch { return null; } }).filter(Boolean)
-        : pending.map((l, i) => [l.path || String(i), l]);
-    items.forEach(([lp, l], i) => {
-        lines.push(`INSERT OR REPLACE INTO pending (path,name,author,verifier,verification,showcase,thumbnail,id,percentToQualify,percentFinished,length,rating,lastUpd,tags,records,run,sort_order) VALUES (${esc(lp)},${esc(l.name)},${esc(l.author)},${esc(l.verifier)},${esc(l.verification)},${esc(l.showcase)},${esc(l.thumbnail)},${esc(l.id)},${l.percentToQualify??'NULL'},${l.percentFinished??'NULL'},${l.length??'NULL'},${l.rating??'NULL'},${esc(l.lastUpd)},${escJ(l.tags??[])},${escJ(l.records??[])},${l.run!=null?escJ(l.run):'NULL'},${i});`);
+    pending.forEach((p, i) => {
+        lines.push(`INSERT INTO pending (name,placement,link,sort_order) VALUES (${esc(p.name)},${esc(p.placement)},${esc(p.link)},${i});`);
     });
 } catch(e) { console.warn(`Skip pending: ${e.message}`); }
 

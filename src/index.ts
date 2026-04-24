@@ -57,7 +57,7 @@ export default {
 
 		if (pathname === '/api/pending' && req.method === 'GET') {
 			const { results } = await env.DB.prepare('SELECT * FROM pending ORDER BY sort_order ASC').all();
-			return json(results.map(parseLevel));
+			return json(results);
 		}
 
 		if (pathname === '/api/editors' && req.method === 'GET') {
@@ -118,33 +118,17 @@ export default {
 
 		if (pathname === '/api/pending' && req.method === 'PUT') {
 			if (!await authed(req, env.DB)) return err('Unauthorized', 401);
-			const body = await req.json() as Record<string, unknown>;
-			const path = body.path as string;
-			await env.DB.prepare(`
-                INSERT INTO pending (path,name,author,verifier,verification,showcase,thumbnail,id,
-                    percentToQualify,percentFinished,length,rating,lastUpd,tags,records,run,sort_order)
-                VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
-                ON CONFLICT(path) DO UPDATE SET
-                    name=excluded.name,author=excluded.author,verifier=excluded.verifier,
-                    verification=excluded.verification,showcase=excluded.showcase,thumbnail=excluded.thumbnail,
-                    id=excluded.id,percentToQualify=excluded.percentToQualify,
-                    percentFinished=excluded.percentFinished,length=excluded.length,rating=excluded.rating,
-                    lastUpd=excluded.lastUpd,tags=excluded.tags,records=excluded.records,
-                    run=excluded.run,sort_order=excluded.sort_order
-            `).bind(
-				path, body.name, body.author, body.verifier, body.verification, body.showcase,
-				body.thumbnail, body.id, body.percentToQualify, body.percentFinished,
-				body.length, body.rating, body.lastUpd,
-				JSON.stringify(body.tags ?? []), JSON.stringify(body.records ?? []),
-				body.run != null ? JSON.stringify(body.run) : null, body.sort_order ?? 0
-			).run();
+			const body = await req.json();
+			await env.DB.prepare(
+				'INSERT INTO pending (name,placement,link,sort_order) VALUES (?,?,?,?)'
+			).bind(body.name, body.placement, body.link ?? null, body.sort_order ?? 0).run();
 			return json({ ok: true });
 		}
 
 		if (pathname.startsWith('/api/pending/') && req.method === 'DELETE') {
 			if (!await authed(req, env.DB)) return err('Unauthorized', 401);
-			const path = decodeURIComponent(pathname.slice('/api/pending/'.length));
-			await env.DB.prepare('DELETE FROM pending WHERE path = ?').bind(path).run();
+			const id = pathname.slice('/api/pending/'.length);
+			await env.DB.prepare('DELETE FROM pending WHERE id = ?').bind(id).run();
 			return json({ ok: true });
 		}
 
