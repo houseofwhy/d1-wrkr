@@ -90,62 +90,99 @@ export default {
 
 		// ── WRITE (require auth) ──
 
-		if (pathname === '/api/levels' && req.method === 'PUT') {
+		if (method === 'POST' && path === '/api/levels/move') {
 			if (!await authed(req, env.DB)) return err('Unauthorized', 401);
-			const body = await req.json();
-			let sortOrder;
-			if (body.insertAt != null) {
-				sortOrder = body.insertAt - 1;
-				await env.DB.prepare('UPDATE levels SET sort_order = sort_order + 1 WHERE sort_order >= ?').bind(sortOrder).run();
-			} else {
-				const maxRow = await env.DB.prepare('SELECT MAX(sort_order) as m FROM levels').first();
-				sortOrder = (maxRow?.m ?? -1) + 1;
-			}
-			await env.DB.prepare(`
-                INSERT INTO levels (path,name,author,creators,verifier,verification,showcase,thumbnail,id,
-                    percentToQualify,percentFinished,length,rating,lastUpd,isVerified,isMain,isFuture,tags,records,run,sort_order)
-                VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
-                ON CONFLICT(path) DO UPDATE SET
-                    name=excluded.name,author=excluded.author,creators=excluded.creators,
-                    verifier=excluded.verifier,verification=excluded.verification,
-                    showcase=excluded.showcase,thumbnail=excluded.thumbnail,id=excluded.id,
-                    percentToQualify=excluded.percentToQualify,percentFinished=excluded.percentFinished,
-                    length=excluded.length,rating=excluded.rating,lastUpd=excluded.lastUpd,
-                    isVerified=excluded.isVerified,isMain=excluded.isMain,isFuture=excluded.isFuture,
-                    tags=excluded.tags,records=excluded.records,run=excluded.run,sort_order=excluded.sort_order
-            `).bind(
-				body.path, body.name, body.author ?? null,
-				body.creators ? JSON.stringify(body.creators) : null,
-				body.verifier ?? null, body.verification ?? null, body.showcase ?? null,
-				body.thumbnail ?? null, body.id ?? null,
-				body.percentToQualify ?? null, body.percentFinished ?? null,
-				body.length ?? null, body.rating ?? null, body.lastUpd ?? null,
-				body.isVerified ? 1 : 0, body.isMain ? 1 : 0, body.isFuture ? 1 : 0,
-				JSON.stringify(body.tags ?? []), JSON.stringify(body.records ?? []),
-				body.run != null ? JSON.stringify(body.run) : null, sortOrder
-			).run();
+			const { path: lPath, newPosition } = await req.json().catch(() => ({}));
+			if (!lPath || !newPosition) return err('Missing fields', 400);
+			const current = await env.DB.prepare('SELECT sort_order FROM levels WHERE path = ?').bind(lPath).first();
+			if (!current) return err('Level not found', 404);
+
+			await env.DB.prepare('UPDATE levels SET sort_order = sort_order - 1 WHERE sort_order > ?').bind(current.sort_order).run();
+
+			const { results: allOrders } = await env.DB.prepare('SELECT sort_order FROM levels ORDER BY sort_order').all();
+			const targetSortOrder = newPosition <= allOrders.length
+				? allOrders[newPosition - 1].sort_order
+				: (allOrders.length > 0 ? allOrders[allOrders.length - 1].sort_order + 1 : 0);
+
+			await env.DB.prepare('UPDATE levels SET sort_order = sort_order + 1 WHERE sort_order >= ?').bind(targetSortOrder).run();
+			await env.DB.prepare('UPDATE levels SET sort_order = ? WHERE path = ?').bind(targetSortOrder, lPath).run();
+
 			return json({ ok: true });
 		}
 
-		if (pathname === '/api/levels/move' && req.method === 'POST') {
+		if (method === 'PUT' && path === '/api/levels') {
 			if (!await authed(req, env.DB)) return err('Unauthorized', 401);
-			const { path, newPosition } = await req.json();
-			const target = newPosition - 1;
-			const level = await env.DB.prepare('SELECT sort_order FROM levels WHERE path = ?').bind(path).first();
-			if (!level) return err('Level not found', 404);
-			const current = level.sort_order;
-			if (current === target) return json({ ok: true });
-			if (current < target) {
-				await env.DB.batch([
-					env.DB.prepare('UPDATE levels SET sort_order = sort_order - 1 WHERE sort_order > ? AND sort_order <= ?').bind(current, target),
-					env.DB.prepare('UPDATE levels SET sort_order = ? WHERE path = ?').bind(target, path),
-				]);
-			} else {
-				await env.DB.batch([
-					env.DB.prepare('UPDATE levels SET sort_order = sort_order + 1 WHERE sort_order >= ? AND sort_order < ?').bind(target, current),
-					env.DB.prepare('UPDATE levels SET sort_order = ? WHERE path = ?').bind(target, path),
-				]);
+			const body = await req.json().catch(() => null);
+			if (!body) return err('Invalid JSON', 400);
+			const { insertAt, ...level } = body;
+			if (!insertAt || insertAt < 1) return err('insertAt must be >= 1', 400);
+			if (!level.path || !level.name) return err('Missing required fields', 400);
+
+			const existing = await env.DB.prepare('SELECT sort_order FROM levels WHERE path = ?').bind(level.path).first();
+			if (existing !== null) {
+				await env.DB.prepare('UPDATE levels SET sort_order = sort_order - 1 WHERE sort_order > ?').bind(existing.sort_order).run();
 			}
+
+			const { results: allOrders } = await env.DB.prepare('SELECT sort_order FROM levels ORDER BY sort_order').all();
+			const targetSortOrder = insertAt <= allOrders.length
+				? allOrders[insertAt - 1].sort_order
+				: (allOrders.length > 0 ? allOrders[allOrders.length - 1].sort_order + 1 : 0);
+
+			await env.DB.prepare('UPDATE levels SET sort_order = sort_order + 1 WHERE sort_order >= ?').bind(targetSortOrder).run();
+
+			await env.DB.prepare(`
+				INSERT OR REPLACE INTO levels (path, name, author, creators, verifier,
+					isVerified, verification, showcase, thumbnail, lastUpd,
+					percentToQualify, records, run, length, rating,
+					percentFinished, isMain, isFuture, tags, id, sort_order)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			`).bind(
+				level.path,
+				level.name,
+				level.author ?? '',
+				JSON.stringify(level.creators ?? []),
+				level.verifier ?? '',
+				level.isVerified ? 1 : 0,
+				level.verification ?? '',
+				level.showcase ?? '',
+				level.thumbnail ?? null,
+				level.lastUpd ?? '',
+				level.percentToQualify ?? 1,
+				JSON.stringify(level.records ?? []),
+				JSON.stringify(level.run ?? []),
+				level.length ?? 0,
+				level.rating ?? 1,
+				level.percentFinished ?? 100,
+				level.isMain ? 1 : 0,
+				level.isFuture ? 1 : 0,
+				JSON.stringify(level.tags ?? []),
+				level.id ?? 'private',
+				targetSortOrder
+			).run();
+
+			return json({ ok: true });
+		}
+
+		if (method === 'POST' && path === '/api/levels/move') {
+			if (!await authed(req, env.DB)) return err('Unauthorized', 401);
+			const { path: lPath, newPosition } = await req.json().catch(() => ({}));
+			if (!lPath || !newPosition) return err('Missing fields', 400);
+			const current = await env.DB.prepare('SELECT sort_order FROM levels WHERE path = ?').bind(lPath).first();
+			if (!current) return err('Level not found', 404);
+
+			// Remove from current position, closing the gap
+			await env.DB.prepare('UPDATE levels SET sort_order = sort_order - 1 WHERE sort_order > ?').bind(current.sort_order).run();
+
+			// Look up the actual sort_order at the target rank (in the list after removal)
+			const { results: allOrders } = await env.DB.prepare('SELECT sort_order FROM levels ORDER BY sort_order').all();
+			const targetSortOrder = newPosition <= allOrders.length
+				? allOrders[newPosition - 1].sort_order
+				: (allOrders.length > 0 ? allOrders[allOrders.length - 1].sort_order + 1 : 0);
+
+			// Shift levels at >= targetSortOrder up to make room
+			await env.DB.prepare('UPDATE levels SET sort_order = sort_order + 1 WHERE sort_order >= ?').bind(targetSortOrder).run();
+			await env.DB.prepare('UPDATE levels SET sort_order = ? WHERE path = ?').bind(targetSortOrder, lPath).run();
+
 			return json({ ok: true });
 		}
 
